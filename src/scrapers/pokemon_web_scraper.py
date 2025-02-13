@@ -69,7 +69,7 @@ class PokemonWebScraper:
                     poison_cells = soup.find_all('td', class_=class_str)
                 
                 # 使用动态类名查找元素
-                base_tables = soup.find_all('table', class_='roundy bgwhite fulltable')
+                # base_tables = soup.find_all('table', class_='roundy bgwhite fulltable')
                 
                 # print(f"找到的毒属性单元格: {poison_cells}")    
                 # 初始化数据字典
@@ -79,7 +79,7 @@ class PokemonWebScraper:
                     'ability_hidden': self._get_hidden_ability(soup),
                     'catch_rate': self._get_catch_rate(poison_cells),
                     'base_exp': self._get_base_exp(poison_cells),
-                    'ev_yield': self._get_ev_yield(soup, base_tables),
+                    'ev_yield': self._get_ev_yield(soup),
                     'egg_groups': self._get_egg_groups(poison_cells),
                     'egg_cycles': self._get_egg_cycles(poison_cells),
                     'gender_ratio': self._get_gender_ratio(soup),
@@ -205,7 +205,7 @@ class PokemonWebScraper:
             print(f"获取基础经验值失败: {e}")
         return ""
 
-    def _get_ev_yield(self, soup: BeautifulSoup, base_tables: List[Tag]) -> Dict[str, int]:
+    def _get_ev_yield(self, soup: BeautifulSoup) -> Dict[str, int]:
         """获取基础点数（使用预先找到的表格）"""
         ev_stats = {'HP': 0, '攻击': 0, '防御': 0, '特攻': 0, '特防': 0, '速度': 0}
         try:
