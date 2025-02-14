@@ -25,7 +25,6 @@ class MoveDescriptionScraper:
 
     def _save_cache(self):
         """保存技能描述缓存"""
-        self.description_cache_file.parent.mkdir(exist_ok=True)
         self.description_cache_file.write_text(
             json.dumps(self.description_cache, ensure_ascii=False, indent=2),
             encoding='utf-8'
@@ -41,15 +40,16 @@ class MoveDescriptionScraper:
             response = self.session.get(url, timeout=10)
             soup = BeautifulSoup(response.text, 'html.parser')
             
-            # 找到第一个tbody标签
-            tbody = soup.find('tbody')
-            if tbody:
-                # 获取第二个tr标签
-                tr = tbody.find_all('tr')[1]
-                if tr:
-                    # 获取td标签中的文本
-                    td = tr.find('td')
-                    if td:
+            # 找到所有tbody标签
+            tbodies = soup.find_all('tbody')
+            
+            # 遍历所有tbody，找到包含技能描述的那个
+            for tbody in tbodies:
+                trs = tbody.find_all('tr')
+                if len(trs) > 1:  # 确保至少有两行
+                    # 获取第二行的td标签
+                    td = trs[1].find('td', {'class': 'roundy'})  # 技能描述通常有roundy类
+                    if td and td.get('style') and 'font-size:smaller' in td.get('style'):
                         description = td.get_text(strip=True)
                         if description:
                             self.description_cache[move_en] = description

@@ -21,4 +21,10 @@ Pillow>=9.0.0
 pathlib>=1.0.1
 
 # 类型提示
-typing-extensions>=4.4.0 
+typing-extensions>=4.4.0
+
+# Selenium
+selenium>=4.0.0
+
+# WebDriver Manager
+webdriver_manager>=3.8.0  # 自动管理驱动程序 
