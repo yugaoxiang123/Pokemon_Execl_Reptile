@@ -4,6 +4,7 @@
 
 ## 项目结构 
 
+```
 pokemon-parser/
 ├── README.md
 ├── requirements.txt
@@ -11,20 +12,25 @@ pokemon-parser/
 │   ├── __init__.py
 │   ├── scrapers/
 │   │   ├── __init__.py
-│   │   ├── pokemon_web_scraper.py
-│   │   ├── pokemon_image_downloader.py
 │   │   ├── ability_description_scraper.py
 │   │   ├── item_description_scraper.py
 │   │   ├── move_description_scraper.py
-│   │   └── pokemon_web_info.py
+│   │   ├── pokemon_evolution_scraper.py
+│   │   ├── pokemon_image_downloader.py
+│   │   ├── pokemon_levelup_scraper.py
+│   │   ├── pokemon_web_info.py
+│   │   ├── pokemon_web_scraper.py
+│   │   └── skill_gif_scraper.py
 │   ├── processors/
 │   │   ├── __init__.py
-│   │   ├── pokemon_to_excel.py
 │   │   ├── ability_to_excel.py
+│   │   ├── assistant_excel_merger.py
+│   │   ├── evolution_data_fixer.py
+│   │   ├── excel_column_merger.py
 │   │   ├── item_to_excel.py
 │   │   ├── move_to_excel.py
 │   │   ├── pokemon_form_data_fixer.py
-│   │   └── excel_column_merger.py
+│   │   └── pokemon_to_excel.py
 │   └── utils/
 │       ├── __init__.py
 │       └── translations.py
@@ -49,6 +55,7 @@ pokemon-parser/
 │   └── pokemon_web_info.xlsx
 └── images/
     └── pokemon_images/
+```
 
 ## 模块说明
 
@@ -56,6 +63,9 @@ pokemon-parser/
 
 - `pokemon_web_scraper.py`: 从神奇宝贝百科网站爬取宝可梦基础信息
 - `pokemon_image_downloader.py`: 下载宝可梦图片
+- `pokemon_levelup_scraper.py`: 爬取宝可梦升级技能信息
+- `pokemon_evolution_scraper.py`: 爬取宝可梦进化信息
+- `skill_gif_scraper.py`: 爬取宝可梦技能GIF动画
 - `ability_description_scraper.py`: 爬取特性描述信息
 - `item_description_scraper.py`: 爬取道具描述信息
 - `move_description_scraper.py`: 爬取技能描述信息
@@ -68,7 +78,9 @@ pokemon-parser/
 - `item_to_excel.py`: 处理道具数据并生成Excel表格
 - `move_to_excel.py`: 处理技能数据并生成Excel表格
 - `pokemon_form_data_fixer.py`: 修复特殊形态宝可梦的数据
+- `evolution_data_fixer.py`: 修复进化数据的空值
 - `excel_column_merger.py`: 合并不同Excel表格的列数据
+- `assistant_excel_merger.py`: 合并同一Excel文件内不同表的数据
 
 ### 工具模块 (src/utils/)
 
@@ -93,29 +105,40 @@ pokemon-parser/
 
 ## 功能特性
 
-1. 数据解析
+1. 数据解析与爬取
    - 解析宝可梦基础数据（属性、能力值等）
-   - 解析特性数据（评分、编号等）
-   - 支持中英文对照
+   - 爬取升级技能和进化信息
+   - 下载技能GIF动画
+   - 获取特性、道具和技能描述
 
-2. 数据爬取
-   - 自动从神奇宝贝百科获取中文翻译
-   - 获取特性描述信息
-   - 下载宝可梦图片
-   - 爬取额外信息（捕获率、基础点数等）
-
-3. 数据处理
+2. 数据处理
    - 特殊形态数据修复
+   - 进化数据空值处理
    - 表格列数据合并
+   - 同一文件内表格合并
    - 自动列宽调整
-   - 数据匹配与更新
 
-4. 数据导出
+3. 数据导出
    - 生成结构化Excel表格
+   - 支持多表数据
+   - 支持图片和GIF导出
    - 自动调整列宽
-   - 支持图片导出
 
 ## 使用方法
 
 1. 安装依赖：
-   - pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. 运行爬虫：
+   ```bash
+   python src/scrapers/skill_gif_scraper.py  # 爬取技能GIF
+   python src/scrapers/pokemon_evolution_scraper.py  # 爬取进化信息
+   ```
+
+3. 处理数据：
+   ```bash
+   python src/processors/assistant_excel_merger.py  # 合并表格数据
+   python src/processors/evolution_data_fixer.py  # 修复进化数据
+   ```

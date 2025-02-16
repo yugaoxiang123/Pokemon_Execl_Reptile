@@ -83,6 +83,15 @@ class PokemonEvolutionScraper:
             
             # 获取所有英文名称
             pokemon_names = df['宝可梦'].dropna().unique().tolist()
+            # test_pokemon = [
+            #     'Charmeleon',    # 基础进化链中间形态
+            #     'Charizard',     # 基础进化链最终形态
+            #     'Charmander',    # 基础进化链初始形态
+            #     'Pikachu',       # 特殊进化链
+            #     'Eevee',         # 多分支进化
+            #     'Mewtwo',        # 没有进化的传说宝可梦
+            #     'Ditto'          # 没有进化的特殊宝可梦
+            # ]
             print(f"找到 {len(pokemon_names)} 个宝可梦")
             
             # 1. 创建新列并指定位置
@@ -103,7 +112,7 @@ class PokemonEvolutionScraper:
             print("\n进化信息已更新到LevelUpMoves表")
 
             # 保存更新后的数据
-            with pd.ExcelWriter(excel_file, engine='openpyxl', mode='a') as writer:
+            with pd.ExcelWriter(excel_file, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
                 df.to_excel(writer, sheet_name='LevelUpMoves', index=False)
                 
                 # 调整列宽
