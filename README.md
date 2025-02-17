@@ -7,6 +7,7 @@
 ```
 pokemon-parser/
 ├── README.md
+├── TABTOY_GUIDE.md
 ├── requirements.txt
 ├── src/
 │   ├── __init__.py
@@ -28,7 +29,9 @@ pokemon-parser/
 │   │   ├── evolution_data_fixer.py
 │   │   ├── excel_column_merger.py
 │   │   ├── item_to_excel.py
+│   │   ├── move_format_converter.py
 │   │   ├── move_to_excel.py
+│   │   ├── null_value_fixer.py
 │   │   ├── pokemon_form_data_fixer.py
 │   │   └── pokemon_to_excel.py
 │   └── utils/
@@ -54,7 +57,8 @@ pokemon-parser/
 │   ├── pokemon_data.xlsx
 │   └── pokemon_web_info.xlsx
 └── images/
-    └── pokemon_images/
+    ├── pokemon_images/
+    └── pokemon_gifs/
 ```
 
 ## 模块说明
@@ -77,8 +81,10 @@ pokemon-parser/
 - `ability_to_excel.py`: 处理特性数据并生成Excel表格
 - `item_to_excel.py`: 处理道具数据并生成Excel表格
 - `move_to_excel.py`: 处理技能数据并生成Excel表格
+- `move_format_converter.py`: 转换技能数据为JSON格式
 - `pokemon_form_data_fixer.py`: 修复特殊形态宝可梦的数据
 - `evolution_data_fixer.py`: 修复进化数据的空值
+- `null_value_fixer.py`: 处理表格中的空值
 - `excel_column_merger.py`: 合并不同Excel表格的列数据
 - `assistant_excel_merger.py`: 合并同一Excel文件内不同表的数据
 
@@ -116,13 +122,15 @@ pokemon-parser/
    - 进化数据空值处理
    - 表格列数据合并
    - 同一文件内表格合并
+   - 技能数据JSON格式化
+   - 空值统一处理
    - 自动列宽调整
 
 3. 数据导出
    - 生成结构化Excel表格
    - 支持多表数据
    - 支持图片和GIF导出
-   - 自动调整列宽
+   - 支持TabToy导出JSON
 
 ## 使用方法
 
@@ -139,6 +147,9 @@ pokemon-parser/
 
 3. 处理数据：
    ```bash
-   python src/processors/assistant_excel_merger.py  # 合并表格数据
-   python src/processors/evolution_data_fixer.py  # 修复进化数据
+   python src/processors/move_format_converter.py  # 转换技能格式
+   python src/processors/null_value_fixer.py  # 处理空值
    ```
+
+4. 导出数据：
+   - 参考 TABTOY_GUIDE.md 使用 TabToy 导出数据
