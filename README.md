@@ -184,29 +184,46 @@ pokemon-parser/
 
 ### 爬虫 (Scrapers)
 
-1. 招式爬虫 (`src/scrapers/move/move_gen_scraper.py`)
+1. 宝可梦爬虫 (`src/scrapers/pokemon/pokemon_gen_scraper.py`)
+   - 从 Pokemon Showdown 爬取各世代宝可梦数据
+   - 保存为 `json/pokemons_by_gen.json`
+
+2. 招式爬虫 (`src/scrapers/move/move_gen_scraper.py`)
    - 从 52poke wiki 爬取各世代招式数据
    - 保存为 `json/moves_by_gen.json`
 
-2. 特性爬虫 (`src/scrapers/ability/ability_gen_scraper.py`)
+3. 特性爬虫 (`src/scrapers/ability/ability_gen_scraper.py`)
    - 从 52poke wiki 爬取各世代特性数据
    - 保存为 `json/abilities_by_gen.json`
 
 ### 数据处理器 (Processors)
 
-1. 道具世代提取器 (`src/processors/item/item_gen_extractor.py`)
+1. 宝可梦世代提取器 (`src/processors/pokemon/pokemon_gen_extractor.py`)
+   - 从爬取的数据中提取宝可梦的世代信息
+   - 更新 Excel 表格中的世代数据
+
+2. 道具世代提取器 (`src/processors/item/item_gen_extractor.py`)
    - 从 `data/items.ts` 提取道具的世代信息
    - 更新 Excel 表格中的世代和编号数据
 
-2. 特性世代提取器 (`src/processors/ability/ability_gen_extractor.py`)
+3. 特性世代提取器 (`src/processors/ability/ability_gen_extractor.py`)
    - 处理特性的世代信息
    - 更新相关数据表
 
-3. 招式世代提取器 (`src/processors/move/move_gen_extractor.py`)
+4. 招式世代提取器 (`src/processors/move/move_gen_extractor.py`)
    - 处理招式的世代信息
    - 更新相关数据表
 
 ## 数据格式
+
+### pokemons_by_gen.json
+```json
+{
+  "1": ["Bulbasaur", "Ivysaur", "Venusaur", ...],
+  "2": ["Chikorita", "Bayleef", "Meganium", ...],
+  ...
+}
+```
 
 ### moves_by_gen.json
 ```json
