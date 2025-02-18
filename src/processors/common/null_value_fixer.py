@@ -9,7 +9,7 @@ class NullValueFixer:
         self.output_dir = Path('output')
         
     def fix_null_values(self):
-        """遍历所有Excel文件，将空值替换为'null'字符串"""
+        """遍历所有Excel文件，将空值替换为'-99'"""
         try:
             # 获取所有xlsx文件
             excel_files = list(self.output_dir.glob('*.xlsx'))
@@ -35,14 +35,19 @@ class NullValueFixer:
                                        for i in range(len(df.columns)) 
                                        if get_column_letter(i+1) in ws.column_dimensions}
                         
-                        # 替换空值
+                        # 替换空值和'null'字符
                         total_nulls = df.isna().sum().sum()
-                        if total_nulls > 0:
-                            print(f"发现 {total_nulls} 个空值")
-                            df = df.fillna('null')
-                            print(f"已将空值替换为'null'")
+                        null_str_count = (df == 'null').sum().sum()
+                        
+                        if total_nulls > 0 or null_str_count > 0:
+                            print(f"发现 {total_nulls} 个空值, {null_str_count} 个'null'字符")
+                            # 先将空值替换为'-99'
+                            df = df.fillna('-99')
+                            # 再将'null'字符替换为'-99'
+                            df = df.replace('null', '-99')
+                            print(f"已将空值和'null'字符替换为'-99'")
                         else:
-                            print("未发现空值")
+                            print("未发现空值或'null'字符")
                             
                         sheets_data[sheet_name] = {
                             'data': df,

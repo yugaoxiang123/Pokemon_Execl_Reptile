@@ -71,7 +71,12 @@ tabtoy.exe -config tabtoy.json
 2. 带格式化的导出：
 ```bash
 # 导出并格式化 JSON
-tabtoy.exe -config tabtoy.json -json_indent
+tabtoy.exe -config tabtoy_pokemon_data.json -json_indent
+.\tabtoy.exe -mode v2 -index tabtoy_pokemon_data.json -json_out pokemon_data.json
+.\tabtoy.exe -mode=v3 -index tabtoy_pokemon_data.json -json_out pokemon_data.json
+.\tabtoy.exe -mode=v3 -index=Index.xlsx -json_out=table_gen.json
+tabtoy.exe -mode=v3 -index=Index.xlsx -json_out=table_gen.json
+.\tabtoy.exe -mode=v3 -index=C:\Users\90953\Downloads\my-pokemon-excel-designer\Index.xlsx -json_out=C:\Users\90953\Downloads\my-pokemon-excel-designer\table_gen.json
 ```
 
 ## 4. 常见问题
