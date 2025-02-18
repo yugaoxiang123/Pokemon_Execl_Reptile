@@ -242,3 +242,48 @@ pokemon-parser/
   ...
 }
 ```
+
+#### pokemon_data.xlsx 字段说明
+```
+基础信息：
+- 编号 (ID)
+- 英文名称 (Name)
+- 中文名称 (ChineseName)
+- 世代 (Gen)
+- 属性（中文）(Type)
+- 属性（英文）(TypeEn)
+
+能力值：
+- 生命值 (HP)
+- 攻击 (Attack)
+- 防御 (Defense)
+- 特攻 (SpAttack)
+- 特防 (SpDefense)
+- 速度 (Speed)
+
+身体数据：
+- 身高 (Height)
+- 体重 (Weight)
+
+特性：
+- 特性（英文）(SpecialNature)
+- 特性（中文）(ChineseSpecialNature)
+
+网页数据：
+- 捕获率 (CaptureRate)
+- 孵化周期 (HatchCycle)
+- 性别比例 (GenderRatio)
+- 基础经验值 (BaseExp)
+
+基础点数：
+- HP基础点数 (BasePointHP)
+- 攻击基础点数 (BasePointAtk)
+- 防御基础点数 (BasePointDef)
+- 特攻基础点数 (BasePointSpAtk)
+- 特防基础点数 (BasePointSpDef)
+- 速度基础点数 (BasePointSpeed)
+
+其他信息：
+- 进化条件 (EvolutionCondition)
+- 升级技能 (LevelUpMoves, JSON格式)
+```
