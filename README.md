@@ -198,9 +198,12 @@ pokemon-parser/
 
 ### 数据处理器 (Processors)
 
-1. 宝可梦世代提取器 (`src/processors/pokemon/pokemon_gen_extractor.py`)
-   - 从爬取的数据中提取宝可梦的世代信息
-   - 更新 Excel 表格中的世代数据
+1. 宝可梦数据处理器
+   - `pokemon_to_excel.py`: 处理基础数据
+   - `pokemon_form_filter.py`: 过滤特殊形态
+   - `pokemon_gen_extractor.py`: 提取世代信息
+   - `pokemon_moves_extractor.py`: 提取技能数据
+   - `pokemon_moves_converter.py`: 转换技能格式
 
 2. 道具世代提取器 (`src/processors/item/item_gen_extractor.py`)
    - 从 `data/items.ts` 提取道具的世代信息
@@ -287,3 +290,34 @@ pokemon-parser/
 - 进化条件 (EvolutionCondition)
 - 升级技能 (LevelUpMoves, JSON格式)
 ```
+
+### pokemon_moves.json
+```json
+{
+  "Bulbasaur": "初始技能:[Tackle,Growl] 升级技能:[L3:Vine Whip,L6:Growth,L9:Leech Seed]",
+  "Ivysaur": "初始技能:[Tackle,Growl] 升级技能:[L3:Vine Whip,L6:Growth,L9:Leech Seed]"
+}
+```
+
+### type_translations.json
+```json
+{
+  "Normal": "一般",
+  "Fire": "火",
+  "Water": "水",
+  // ... 其他属性翻译
+}
+```
+
+### 技能数据格式说明
+1. 初始技能：宝可梦一级就能学会的技能
+2. 升级技能：通过升级学习的技能，格式为"等级:技能名"
+3. 示例格式：
+   ```
+   初始技能:[技能1,技能2] 升级技能:[L4:技能3,L8:技能4]
+   ```
+
+### 文件命名规范
+- 原始数据：`pokemon_moves.json`
+- 格式化后：`pokemon_moves_formatted.json`
+- 翻译映射：`type_translations.json`

@@ -88,6 +88,7 @@ def create_item_type_xlsx():
         ["表头", "item_data", "道具名称（中文）", "ChineseName", "string", "", "", "", ""],
         ["表头", "item_data", "世代", "Gen", "int", "", "", "", ""],
         ["表头", "item_data", "编号", "ID", "int", "", "", "", ""],
+        ["表头", "item_data", "精灵图编号", "SpriteID", "int", "", "", "", ""],
         ["表头", "item_data", "道具描述", "Description", "string", "", "", "", ""]
     ]
     for row_idx, row_data in enumerate(data, 2):
@@ -135,11 +136,11 @@ def create_move_type_xlsx():
         ["表头", "move_data", "技能名称（中文）", "ChineseName", "string", "", "", "", ""],
         ["表头", "move_data", "世代", "Gen", "int", "", "", "", ""],
         ["表头", "move_data", "编号", "ID", "int", "", "", "", ""],
-        ["表头", "move_data", "命中", "Accuracy", "int", "", "", "", ""],
+        ["表头", "move_data", "命中率", "Accuracy", "int", "", "", "", ""],
         ["表头", "move_data", "威力", "Power", "int", "", "", "", ""],
         ["表头", "move_data", "PP值", "PP", "int", "", "", "", ""],
         ["表头", "move_data", "优先度", "Priority", "int", "", "", "", ""],
-        ["表头", "move_data", "优先度", "MoveTarget", "string", "", "", "", ""],
+        ["表头", "move_data", "技能目标", "MoveTarget", "string", "", "", "", ""],
         ["表头", "move_data", "分类", "Classify", "string", "", "", "", ""],
         ["表头", "move_data", "技能描述", "Description", "string", "", "", "", ""],
     ]
@@ -177,7 +178,7 @@ def create_pokemon_type_xlsx():
     ws.title = "Type"
     
     # 添加表头
-    headers = ["编号", "英文名称", "中文名称", "世代", "HP", "攻击", "防御", "特攻", "特防", "速度", "生命值", "物攻", "物防", "特攻", "特防", "速度", "化石名称"]
+    headers = ["种类", "对象类型", "标识名", "字段名", "字段类型", "数组切割", "值", "索引", "标记"]
     for col, header in enumerate(headers, 1):
         cell = ws.cell(row=1, column=col, value=header)
         cell.font = Font(bold=True)
@@ -211,7 +212,7 @@ def create_pokemon_type_xlsx():
         ["表头", "pokemon_data", "特防基础点数（网页）", "BasePointSpDef", "int", "", "", "", ""],
         ["表头", "pokemon_data", "速度基础点数（网页）", "BasePointSpeed", "int", "", "", "", ""],
         ["表头", "pokemon_data", "进化条件（网页）", "EvolutionCondition", "string", "", "", "", ""],
-        ["表头", "pokemon_data", "升级技能", "LevelUpMoves", "json", "", "", "", ""]
+        ["表头", "pokemon_data", "升级技能", "LevelUpMoves", "string", "", "", "", ""]
     ]
     
     for row_idx, row_data in enumerate(data, 2):
@@ -223,13 +224,13 @@ def create_pokemon_type_xlsx():
 def main():
     print("开始创建 Excel 文件...")
     # create_ability_index_xlsx()
-    create_item_index_xlsx()
-    create_move_index_xlsx()
-    create_pokemon_index_xlsx()
+    # create_item_index_xlsx()
+    # create_move_index_xlsx()
+    # create_pokemon_index_xlsx()
 
     # create_ability_type_xlsx()
-    create_item_type_xlsx()
-    create_move_type_xlsx()
+    # create_item_type_xlsx()
+    # create_move_type_xlsx()
     create_pokemon_type_xlsx()
     print("\n所有文件创建完成！")
 
